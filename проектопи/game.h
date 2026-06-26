@@ -3,30 +3,30 @@
 
 #include <windows.h>    
 
-// ФУНКЦИИ ИНТЕРФЕЙСА 
-void setupConsole();    // Настройка консоли (кодировка, локаль)
-void displayBoard();    // Отрисовка игрового поля
-void chooseSymbol();    // Выбор символа игроком
-void setConsoleColor(int colorCode); // Установка цвета текста в консоли
+// Р¤РЈРќРљР¦РР РРќРўР•Р Р¤Р•Р™РЎРђ 
+void setupConsole();    // РќР°СЃС‚СЂРѕР№РєР° РєРѕРЅСЃРѕР»Рё (РєРѕРґРёСЂРѕРІРєР°, Р»РѕРєР°Р»СЊ)
+void displayBoard();    // РћС‚СЂРёСЃРѕРІРєР° РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
+void chooseSymbol();    // Р’С‹Р±РѕСЂ СЃРёРјРІРѕР»Р° РёРіСЂРѕРєРѕРј
+void setConsoleColor(int colorCode); // РЈСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° С‚РµРєСЃС‚Р° РІ РєРѕРЅСЃРѕР»Рё
 
-// ИГРОВАЯ ЛОГИКА 
-void play();            // Главный игровой цикл
-bool checkWinner(int player); // Проверка победителя
-bool isBoardFull();     // Проверка, заполнено ли поле
-void playerMove();      // Обработка хода игрока
-void botMove();         // Ход компьютера 
+// РР“Р РћР’РђРЇ Р›РћР“РРљРђ 
+void play();            // Р“Р»Р°РІРЅС‹Р№ РёРіСЂРѕРІРѕР№ С†РёРєР»
+bool checkWinner(int player); // РџСЂРѕРІРµСЂРєР° РїРѕР±РµРґРёС‚РµР»СЏ
+bool isBoardFull();     // РџСЂРѕРІРµСЂРєР°, Р·Р°РїРѕР»РЅРµРЅРѕ Р»Рё РїРѕР»Рµ
+void playerMove();      // РћР±СЂР°Р±РѕС‚РєР° С…РѕРґР° РёРіСЂРѕРєР°
+void botMove();         // РҐРѕРґ РєРѕРјРїСЊСЋС‚РµСЂР° 
 
-// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ 
-extern int board[9];    // Игровое поле 
-extern bool gameActive; // Флаг активности игры
-extern int playerSymbol; // Символ игрока 
-extern int botSymbol;   // Символ компьютера 
+// Р“Р›РћР‘РђР›Р¬РќР«Р• РџР•Р Р•РњР•РќРќР«Р• 
+extern int board[9];    // РРіСЂРѕРІРѕРµ РїРѕР»Рµ 
+extern bool gameActive; // Р¤Р»Р°Рі Р°РєС‚РёРІРЅРѕСЃС‚Рё РёРіСЂС‹
+extern int playerSymbol; // РЎРёРјРІРѕР» РёРіСЂРѕРєР° 
+extern int botSymbol;   // РЎРёРјРІРѕР» РєРѕРјРїСЊСЋС‚РµСЂР° 
 
-//  КОНСТАНТЫ ЦВЕТОВ 
-#define COLOR_WHITE 7   // Белый цвет 
-#define COLOR_RED 12    // Красный 
-#define COLOR_BLUE 9    // Синий
-#define COLOR_GREEN 10  // Зеленый 
-#define COLOR_YELLOW 14 // Желтый 
+//  РљРћРќРЎРўРђРќРўР« Р¦Р’Р•РўРћР’ 
+#define COLOR_WHITE 7   // Р‘РµР»С‹Р№ С†РІРµС‚ 
+#define COLOR_RED 12    // РљСЂР°СЃРЅС‹Р№ 
+#define COLOR_BLUE 9    // РЎРёРЅРёР№
+#define COLOR_GREEN 10  // Р—РµР»РµРЅС‹Р№ 
+#define COLOR_YELLOW 14 // Р–РµР»С‚С‹Р№ 
 
 #endif 
