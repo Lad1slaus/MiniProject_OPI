@@ -6,71 +6,71 @@
 
 using namespace std;    
 
-// ОПРЕДЕЛЕНИЕ ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ
-int board[9];           // Игровое поле: 9 клеток
-bool gameActive;        // Активна ли игра?
+// РћРџР Р•Р”Р•Р›Р•РќРР• Р“Р›РћР‘РђР›Р¬РќР«РҐ РџР•Р Р•РњР•РќРќР«РҐ
+int board[9];           // РРіСЂРѕРІРѕРµ РїРѕР»Рµ: 9 РєР»РµС‚РѕРє
+bool gameActive;        // РђРєС‚РёРІРЅР° Р»Рё РёРіСЂР°?
 int playerSymbol;       // 1 = X, 2 = O
 int botSymbol;          // 1 = X, 2 = O
 
-//  ФУНКЦИЯ НАСТРОЙКИ КОНСОЛИ 
+//  Р¤РЈРќРљР¦РРЇ РќРђРЎРўР РћР™РљР РљРћРќРЎРћР›Р 
 void setupConsole() {
-    SetConsoleCP(65001);        // Устанавливаем кодовую страницу ввода на UTF-8
-    SetConsoleOutputCP(65001);  // Устанавливаем кодовую страницу вывода на UTF-8
-    setlocale(LC_ALL, "ru");    // Устанавливаем русскую локаль
+    SetConsoleCP(65001);        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРґРѕРІСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ РІРІРѕРґР° РЅР° UTF-8
+    SetConsoleOutputCP(65001);  // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРґРѕРІСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ РІС‹РІРѕРґР° РЅР° UTF-8
+    setlocale(LC_ALL, "ru");    // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂСѓСЃСЃРєСѓСЋ Р»РѕРєР°Р»СЊ
 }
 
-// ФУНКЦИЯ ОТОБРАЖЕНИЯ ПОЛЯ
+// Р¤РЈРќРљР¦РРЇ РћРўРћР‘Р РђР–Р•РќРРЇ РџРћР›РЇ
 void displayBoard() {
     cout << "\n";              
-    cout << " +---+---+---+\n";  // Верхняя граница поля
+    cout << " +---+---+---+\n";  // Р’РµСЂС…РЅСЏСЏ РіСЂР°РЅРёС†Р° РїРѕР»СЏ
 
-    for (int i = 0; i < 3; i++) {          // 3 строки, цикл поля
+    for (int i = 0; i < 3; i++) {          // 3 СЃС‚СЂРѕРєРё, С†РёРєР» РїРѕР»СЏ
         cout << " |";                     
 
         for (int j = 0; j < 3; j++) {      
-            int index = i * 3 + j;         // Преобразуем координаты в индекс (0-8)
+            int index = i * 3 + j;         // РџСЂРµРѕР±СЂР°Р·СѓРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РІ РёРЅРґРµРєСЃ (0-8)
 
-            if (board[index] == 0) {       // Если клетка пустая
-                setConsoleColor(COLOR_GREEN);  // Зеленый цвет
-                cout << " " << index << " ";   // Показываем номер клетки
+            if (board[index] == 0) {       // Р•СЃР»Рё РєР»РµС‚РєР° РїСѓСЃС‚Р°СЏ
+                setConsoleColor(COLOR_GREEN);  // Р—РµР»РµРЅС‹Р№ С†РІРµС‚
+                cout << " " << index << " ";   // РџРѕРєР°Р·С‹РІР°РµРј РЅРѕРјРµСЂ РєР»РµС‚РєРё
                 setConsoleColor(COLOR_WHITE);  
                 cout << "|";                   
             }
-            else if (board[index] == 1) {  // Если в клетке X
-                setConsoleColor(COLOR_RED);    // Красный цвет
-                cout << " X ";                 // Показываем X
+            else if (board[index] == 1) {  // Р•СЃР»Рё РІ РєР»РµС‚РєРµ X
+                setConsoleColor(COLOR_RED);    // РљСЂР°СЃРЅС‹Р№ С†РІРµС‚
+                cout << " X ";                 // РџРѕРєР°Р·С‹РІР°РµРј X
                 setConsoleColor(COLOR_WHITE);  
                 cout << "|";                  
             }
-            else {                          // Если в клетке O
-                setConsoleColor(COLOR_BLUE);   // Синий цвет
-                cout << " O ";                 // Показываем O
+            else {                          // Р•СЃР»Рё РІ РєР»РµС‚РєРµ O
+                setConsoleColor(COLOR_BLUE);   // РЎРёРЅРёР№ С†РІРµС‚
+                cout << " O ";                 // РџРѕРєР°Р·С‹РІР°РµРј O
                 setConsoleColor(COLOR_WHITE);  
                 cout << "|";                   
             }
         }
 
-        cout << "\n";                      // Переход на новую строку
-        if (i < 2) cout << " +---+---+---+\n"; // Средняя граница 
+        cout << "\n";                      // РџРµСЂРµС…РѕРґ РЅР° РЅРѕРІСѓСЋ СЃС‚СЂРѕРєСѓ
+        if (i < 2) cout << " +---+---+---+\n"; // РЎСЂРµРґРЅСЏСЏ РіСЂР°РЅРёС†Р° 
     }
 
-    cout << " +---+---+---+\n\n";         // Нижняя граница поля
+    cout << " +---+---+---+\n\n";         // РќРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р° РїРѕР»СЏ
 }
 
-//  ФУНКЦИЯ ВЫБОРА СИМВОЛА 
+//  Р¤РЈРќРљР¦РРЇ Р’Р«Р‘РћР Рђ РЎРРњР’РћР›Рђ 
 void chooseSymbol() {
-    char choice;              // Выбор пользователя
-    bool validChoice = false; // Флаг корректного выбора
+    char choice;              // Р’С‹Р±РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+    bool validChoice = false; // Р¤Р»Р°Рі РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РІС‹Р±РѕСЂР°
 
     setConsoleColor(COLOR_RED);
-    cout << "Крестики (X) - красные\n";
+    cout << "РљСЂРµСЃС‚РёРєРё (X) - РєСЂР°СЃРЅС‹Рµ\n";
     setConsoleColor(COLOR_BLUE);
-    cout << "Нолики (O) - синие\n";
+    cout << "РќРѕР»РёРєРё (O) - СЃРёРЅРёРµ\n";
     setConsoleColor(COLOR_WHITE);
 
-    // Цикл продолжается, пока пользователь не сделает правильный выбор
+    // Р¦РёРєР» РїСЂРѕРґРѕР»Р¶Р°РµС‚СЃСЏ, РїРѕРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ СЃРґРµР»Р°РµС‚ РїСЂР°РІРёР»СЊРЅС‹Р№ РІС‹Р±РѕСЂ
     while (!validChoice) {
-        cout << "\nВыберите символ (";
+        cout << "\nР’С‹Р±РµСЂРёС‚Рµ СЃРёРјРІРѕР» (";
         setConsoleColor(COLOR_RED);
         cout << "X";
         setConsoleColor(COLOR_WHITE);
@@ -80,37 +80,37 @@ void chooseSymbol() {
         setConsoleColor(COLOR_WHITE);
         cout << "): ";
 
-        cin >> choice;  // Считываем выбор пользователя
+        cin >> choice;  // РЎС‡РёС‚С‹РІР°РµРј РІС‹Р±РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 
-        // Обработка выбора X 
-        if (choice == 'X' || choice == 'x' || choice == 'Х' || choice == 'х') {
-            playerSymbol = 1;  // Игрок будет X 
-            botSymbol = 2;     // Компьютер будет O 
+        // РћР±СЂР°Р±РѕС‚РєР° РІС‹Р±РѕСЂР° X 
+        if (choice == 'X' || choice == 'x' || choice == 'РҐ' || choice == 'С…') {
+            playerSymbol = 1;  // РРіСЂРѕРє Р±СѓРґРµС‚ X 
+            botSymbol = 2;     // РљРѕРјРїСЊСЋС‚РµСЂ Р±СѓРґРµС‚ O 
             validChoice = true; 
 
       
-            cout << "\nВы играете за ";
+            cout << "\nР’С‹ РёРіСЂР°РµС‚Рµ Р·Р° ";
             setConsoleColor(COLOR_RED);
-            cout << "КРЕСТИКИ";
+            cout << "РљР Р•РЎРўРРљР";
             setConsoleColor(COLOR_WHITE);
-            cout << " (красные)\n";
+            cout << " (РєСЂР°СЃРЅС‹Рµ)\n";
         }
-        // Обработка выбора O 
-        else if (choice == 'O' || choice == 'o' || choice == 'О' || choice == 'о' || choice == '0') {
-            playerSymbol = 2;  // Игрок будет O 
-            botSymbol = 1;     // Компьютер будет X 
+        // РћР±СЂР°Р±РѕС‚РєР° РІС‹Р±РѕСЂР° O 
+        else if (choice == 'O' || choice == 'o' || choice == 'Рћ' || choice == 'Рѕ' || choice == '0') {
+            playerSymbol = 2;  // РРіСЂРѕРє Р±СѓРґРµС‚ O 
+            botSymbol = 1;     // РљРѕРјРїСЊСЋС‚РµСЂ Р±СѓРґРµС‚ X 
             validChoice = true; 
 
-            cout << "\nВы играете за ";
+            cout << "\nР’С‹ РёРіСЂР°РµС‚Рµ Р·Р° ";
             setConsoleColor(COLOR_BLUE);
-            cout << "НОЛИКИ";
+            cout << "РќРћР›РРљР";
             setConsoleColor(COLOR_WHITE);
-            cout << " (синие)\n";
+            cout << " (СЃРёРЅРёРµ)\n";
         }
-        // Если введен неправильный символ
+        // Р•СЃР»Рё РІРІРµРґРµРЅ РЅРµРїСЂР°РІРёР»СЊРЅС‹Р№ СЃРёРјРІРѕР»
         else {
             setConsoleColor(COLOR_YELLOW); 
-            cout << "Ошибка! Введите X или O\n";
+            cout << "РћС€РёР±РєР°! Р’РІРµРґРёС‚Рµ X РёР»Рё O\n";
             setConsoleColor(COLOR_WHITE);   
         }
     }
